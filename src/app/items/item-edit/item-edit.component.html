@@ -1,1 +1,37 @@
-<p>item-edit works!</p>
+EEEEditableItem : {{editableItem |json}}
+<div *ngIf="editableItem">
+  editableItemJson: {{editableItem | json}} {{editableItem.id}}
+  <form [formGroup]="formEdit" (ngSubmit)="submit()">
+    <h3>edit item</h3>
+    <div>
+      <label for="title">Name</label>
+      <input id="title" class="form-control"
+             type="text" formControlName="title" required>
+
+      <div *ngIf="title.invalid && title.touched">
+        <span *ngIf="title.errors.required">
+          Name is required
+        </span>
+        <span *ngIf="title.errors.minlength">
+          Name must be at least 4 characters long.
+        </span>
+
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label for="description">Description</label>
+      <input id="description" type="text" formControlName="description">
+    </div>
+
+    <div class="form-control">
+      <label for="price">Price</label>
+      <input id="price" type="text" formControlName="price">
+    </div>
+    <button type="submit"
+            [disabled]="formEdit.invalid"
+    >Save</button>
+  </form>
+  <button (click)="cancelEditItem()">Cancel</button>
+</div>
+

@@ -1,1 +1,11 @@
-<p>item-list works!</p>
+<div *ngIf="items.length">
+  <h3>Items:</h3>
+  <ul *ngFor="let item of items">
+    <li>id: {{item.id}} Title: {{item.title}} <button (click)="editItem(item)">Edit</button></li>
+  </ul>
+</div>
+<div *ngIf="changedItem">
+  changedItem List: {{changedItem | json}}
+</div>
+
+

@@ -1,1 +1,7 @@
-<app-item-create></app-item-create>
+<app-item-create (newItemAdded)="newItemAdded($event)"></app-item-create>
+<app-item-list [newItem]="newItem" (editableItem)="editItem($event)" [changedItem]="changedItem"></app-item-list>
+<div *ngIf="showEditItem">
+  <app-item-edit [editableItem]="editableItem" (changedItem)="getChangedItem($event)"></app-item-edit>
+</div>
+
+<!-- New Item (parent) {{newItem | json}}-->
