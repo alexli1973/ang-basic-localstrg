@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Item} from './shared/interfaces/item';
 import {Subject} from 'rxjs';
 
@@ -7,16 +7,30 @@ import {Subject} from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ang-basic-localstrg';
   newItem: Subject<Item> = new Subject<Item>(); // for item-list update
   editableItem: Item;
   showEditItem = false;
   changedItem: Item;
+  items: Item[];
 
-  newItemAdded($event: Item) {
-    console.log('Event', $event);
-    this.newItem.next($event); // update item-list with new item
+  // @Input() newItem: Subject<Item>;
+  // items: Item[];
+  // @Output() editableItem = new EventEmitter<Item>();
+  // @Input() changedItem;
+
+  constructor() {
+    this.items = [];
+  }
+
+  ngOnInit(): void {
+  }
+
+  newItemAdded(item: Item) {
+    // console.log('Event', $event);
+    this.items.push({...item, id: this.items.length + 1});
+    // this.newItem.next($event); // update item-list with new item
   }
 
   editItem(item: Item) {
@@ -26,7 +40,8 @@ export class AppComponent {
   }
 
   getChangedItem(item: Item) {
-    debugger
     this.changedItem = item;
   }
+
+
 }

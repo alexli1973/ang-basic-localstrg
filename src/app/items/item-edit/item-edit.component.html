@@ -1,6 +1,5 @@
-EEEEditableItem : {{editableItem |json}}
 <div *ngIf="editableItem">
-  editableItemJson: {{editableItem | json}} {{editableItem.id}}
+  editableItem Id: {{editableItem.id}}
   <form [formGroup]="formEdit" (ngSubmit)="submit()">
     <h3>edit item</h3>
     <div>
