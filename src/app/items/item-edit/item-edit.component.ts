@@ -10,6 +10,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class ItemEditComponent implements OnInit {
   @Input() editableItem: Item;
   @Output() changedItem = new EventEmitter<Item>();
+  @Output() closeEditBlock = new EventEmitter();
   formEdit: FormGroup;
 
   constructor() { }
@@ -28,13 +29,12 @@ export class ItemEditComponent implements OnInit {
 
   submit() {
     this.changedItem.emit({...this.formEdit.value, id: this.editableItem.id});
-    debugger;
     this.formEdit.reset();
-    this.editableItem = null;
-    console.log({...this.changedItem});
+    this.closeEditBlock.emit(null);
+    // console.log({...this.changedItem});
   }
 
   cancelEditItem() {
-     this.editableItem = null;
+    this.closeEditBlock.emit(null);
   }
 }

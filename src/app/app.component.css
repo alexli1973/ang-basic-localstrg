@@ -1,0 +1,16 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  justify-content: space-around;
+}
+
+.items-container,
+.item-edit-container {
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid darkgrey;
+  flex-grow: 1;
+  max-width: fit-content;
+
+}

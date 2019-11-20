@@ -1,17 +1,29 @@
-<app-item-create (newItemAdded)="newItemAdded($event)"></app-item-create>
-<!--<app-item-list [newItem]="newItem" (editableItem)="editItem($event)" [changedItem]="changedItem"></app-item-list>-->
-<div *ngIf="showEditItem">
-  <app-item-edit [editableItem]="editableItem" (changedItem)="getChangedItem($event)"></app-item-edit>
-</div>
+<div class="main-container">
+  <div class="items-container">
+    <div class="item-create">
+      <app-item-create (newItemAdded)="newItemAdded($event)"></app-item-create>
+    </div>
 
-<div *ngIf="items.length">
-  <h3>Items:</h3>
-  <ul *ngFor="let item of items">
-    <li>id: {{item.id}} Title: {{item.title}} <button (click)="editItem(item)">Edit</button></li>
-  </ul>
-</div>
-<div *ngIf="changedItem">
-  changedItem main comp: {{changedItem | json}}
+    <div *ngIf="items.length" class="item-list">
+      <h3>Items:</h3>
+      <ul >
+        <li *ngFor="let item of items;trackBy: trackByFn">
+          id: {{item.id}} Title: {{item.title}}
+          <button (click)="editItem(item)">Edit</button>
+          <button (click)="deleteItem(item)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="showEditItem" class="item-edit-container">
+    <app-item-edit
+      [editableItem]="editableItem"
+      (changedItem)="getChangedItem($event)"
+      (closeEditBlock)="showEditItem = false"
+    >
+    </app-item-edit>
+  </div>
 </div>
 
 
